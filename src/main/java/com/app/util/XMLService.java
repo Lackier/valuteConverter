@@ -16,12 +16,9 @@ import java.util.List;
 
 @Service
 public class XMLService {
-
     private final Logger logger = LoggerFactory.getLogger(XMLService.class);
 
-
     public ValCurs parseCourse(String URL) {
-
         ValCurs valCurs = null;
 
         try {
@@ -29,29 +26,25 @@ public class XMLService {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(URL);
 
-            // normalize XML response
             doc.getDocumentElement().normalize();
+            Node nodeValCurs = doc.getElementsByTagName("ValCurs").item(0);
+            Element elemValCurs = (Element) nodeValCurs;
 
-            //read course details first
             valCurs = new ValCurs(
-                    //Integer.parseInt(doc.getElementsByTagName("id").item(0).getTextContent()),
+                    elemValCurs.getAttribute("Date"),
+                    elemValCurs.getAttribute("name")
                     );
 
-            //read students list
             NodeList nodeList = doc.getElementsByTagName("Valute");
-
-            //create an empty list for students
             List<Valute> valutes = new ArrayList<>();
 
-            //loop all available student nodes
             for (int i = 0; i < nodeList.getLength(); i++) {
-
                 Node node = nodeList.item(i);
 
                 if(node.getNodeType() == Node.ELEMENT_NODE) {
                     Element elem = (Element) node;
                     Valute valute = new Valute(
-                            "",
+                            elem.getAttribute("ID"),
                             elem.getElementsByTagName("NumCode").item(0).getTextContent(),
                             elem.getElementsByTagName("CharCode").item(0).getTextContent(),
                             Integer.parseInt(elem.getElementsByTagName("Nominal").item(0).getTextContent()),
@@ -61,7 +54,6 @@ public class XMLService {
                     valutes.add(valute);
                 }
             }
-
             valCurs.setValutes(valutes);
 
         } catch (Exception ex) {
