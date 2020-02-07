@@ -1,4 +1,4 @@
-package com.app.util;
+package com.app.service;
 
 import com.app.model.Currency;
 import org.slf4j.Logger;
@@ -19,10 +19,11 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class XMLService {
-    private final Logger logger = LoggerFactory.getLogger(XMLService.class);
+public class CurrencyLoaderService {
 
-    public List<Currency> parseCourse(String URL) {
+    private final Logger logger = LoggerFactory.getLogger(CurrencyLoaderService.class);
+
+    public List<Currency> parseDailyCurrencies(String URL) {
         List<Currency> currencies = null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
