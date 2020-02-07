@@ -1,5 +1,7 @@
 package com.app.util;
 
+import com.app.model.Valute;
+
 import java.util.Date;
 import java.util.List;
 

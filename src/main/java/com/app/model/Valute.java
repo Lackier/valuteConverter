@@ -1,6 +1,16 @@
-package com.app.util;
+package com.app.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+@Entity
 public class Valute {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long Id;
 
     private String id;
     private String numCode;
@@ -8,6 +18,8 @@ public class Valute {
     private int nominal;
     private String name;
     private String value;
+
+    protected Valute(){};
 
     public Valute(String ID, String numCode, String charCode, int nominal, String name, String value) {
         this.id = ID;
@@ -18,11 +30,8 @@ public class Valute {
         this.value = value;
     }
 
-    String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
+    public Long getId() {
+        return Id;
     }
     public String getNumCode() {
         return numCode;
@@ -57,6 +66,6 @@ public class Valute {
 
     @Override
     public String toString() {
-        return id + " " + numCode + " " + charCode + " " + nominal + " " + name + " " + value + "\n";
+        return Id + " " + id + " " + numCode + " " + charCode + " " + nominal + " " + name + " " + value + "\n";
     }
 }
