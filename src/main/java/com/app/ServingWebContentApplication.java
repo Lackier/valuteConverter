@@ -1,10 +1,13 @@
 package com.app;
 
-import com.app.util.ValCurs;
+import com.app.model.Currency;
+import com.app.repository.CurrenciesRepo;
 import com.app.util.XMLService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.List;
 
 @SpringBootApplication
 public class ServingWebContentApplication {
@@ -15,8 +18,11 @@ public class ServingWebContentApplication {
     }
 
     @Bean
-    public void run() throws Exception {
-        ValCurs valutes = xmlService.parseCourse("http://www.cbr.ru/scripts/XML_daily.asp");
-        System.out.println(valutes);
+    public void run(CurrenciesRepo currenciesRepo) throws Exception {
+        List<Currency> currencies = xmlService.parseCourse("http://www.cbr.ru/scripts/XML_daily.asp");
+
+        for (Currency currency: currencies) {
+            System.out.println(currency);
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.app.util;
 
-import com.app.model.Valute;
+import com.app.model.Currency;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,9 +22,8 @@ import java.util.List;
 public class XMLService {
     private final Logger logger = LoggerFactory.getLogger(XMLService.class);
 
-    public ValCurs parseCourse(String URL) {
-        ValCurs valCurs = null;
-
+    public List<Currency> parseCourse(String URL) {
+        List<Currency> currencies = null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -34,39 +33,33 @@ public class XMLService {
             Node nodeValCurs = doc.getElementsByTagName("ValCurs").item(0);
             Element elemValCurs = (Element) nodeValCurs;
 
-            String date = elemValCurs.getAttribute("Date");
-
-            valCurs = new ValCurs(
-                    stringToDate(date),
-                    elemValCurs.getAttribute("name")
-                    );
+            Date date = stringToDate(elemValCurs.getAttribute("Date"));
 
             NodeList nodeList = doc.getElementsByTagName("Valute");
-            List<Valute> valutes = new ArrayList<>();
+            currencies = new ArrayList<>();
 
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Node node = nodeList.item(i);
 
                 if(node.getNodeType() == Node.ELEMENT_NODE) {
                     Element elem = (Element) node;
-                    Valute valute = new Valute(
+                    Currency currency = new Currency(
                             elem.getAttribute("ID"),
                             elem.getElementsByTagName("NumCode").item(0).getTextContent(),
                             elem.getElementsByTagName("CharCode").item(0).getTextContent(),
                             Integer.parseInt(elem.getElementsByTagName("Nominal").item(0).getTextContent()),
                             elem.getElementsByTagName("Name").item(0).getTextContent(),
-                            elem.getElementsByTagName("Value").item(0).getTextContent()
+                            elem.getElementsByTagName("Value").item(0).getTextContent(),
+                            date
                     );
-                    valutes.add(valute);
+                    currencies.add(currency);
                 }
             }
-            valCurs.setValuteList(valutes);
 
         } catch (Exception ex) {
             logger.error(ex.getMessage());
         }
-
-        return valCurs;
+        return currencies;
     }
 
     private Date stringToDate(String dateString) throws ParseException {

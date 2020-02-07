@@ -1,6 +1,6 @@
 package com.app.util;
 
-import com.app.model.Valute;
+import com.app.model.Currency;
 
 import java.util.Date;
 import java.util.List;
@@ -9,7 +9,7 @@ public class ValCurs {
 
     private Date date;
     private String name;
-    private List<Valute> valuteList;
+    private List<Currency> currencyList;
 
     public ValCurs(Date date, String name) {
         this.date = date;
@@ -25,11 +25,11 @@ public class ValCurs {
     public void setName(String name) {
         this.name = name;
     }
-    public List<Valute> getValuteList() {
-        return valuteList;
+    public List<Currency> getCurrencyList() {
+        return currencyList;
     }
-    public void setValuteList(List<Valute> valuteList) {
-        this.valuteList = valuteList;
+    public void setCurrencyList(List<Currency> currencyList) {
+        this.currencyList = currencyList;
     }
     public Date getDate() {
         return date;
@@ -37,6 +37,6 @@ public class ValCurs {
 
     @Override
     public String toString() {
-        return "ValCurs " + date + " " + name + "\n" + valuteList;
+        return "ValCurs " + date + " " + name + "\n" + currencyList;
     }
 }
