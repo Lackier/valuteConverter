@@ -2,61 +2,61 @@ package com.app.util;
 
 public class Valute {
 
-    private String ID;
-    private String NumCode;
-    private String CharCode;
-    private int Nominal;
-    private String Name;
-    private String Value;
+    private String id;
+    private String numCode;
+    private String charCode;
+    private int nominal;
+    private String name;
+    private String value;
 
     public Valute(String ID, String numCode, String charCode, int nominal, String name, String value) {
-        this.ID = ID;
-        NumCode = numCode;
-        CharCode = charCode;
-        Nominal = nominal;
-        Name = name;
-        Value = value;
+        this.id = ID;
+        this.numCode = numCode;
+        this.charCode = charCode;
+        this.nominal = nominal;
+        this.name = name;
+        this.value = value;
     }
 
-    String getID() {
-        return ID;
+    String getId() {
+        return id;
     }
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setId(String id) {
+        this.id = id;
     }
     public String getNumCode() {
-        return NumCode;
+        return numCode;
     }
     public void setNumCode(String numCode) {
-        NumCode = numCode;
+        this.numCode = numCode;
     }
     public String getCharCode() {
-        return CharCode;
+        return charCode;
     }
     public void setCharCode(String charCode) {
-        CharCode = charCode;
+        this.charCode = charCode;
     }
     public int getNominal() {
-        return Nominal;
+        return nominal;
     }
     public void setNominal(int nominal) {
-        Nominal = nominal;
+        this.nominal = nominal;
     }
     public String getName() {
-        return Name;
+        return name;
     }
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
     public String getValue() {
-        return Value;
+        return value;
     }
     public void setValue(String value) {
-        Value = value;
+        this.value = value;
     }
 
     @Override
     public String toString() {
-        return ID + " " + NumCode + " " + CharCode + " " + Nominal + " " + Name + " " + Value + "\n";
+        return id + " " + numCode + " " + charCode + " " + nominal + " " + name + " " + value + "\n";
     }
 }

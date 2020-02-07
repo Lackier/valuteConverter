@@ -10,8 +10,11 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,8 +33,10 @@ public class XMLService {
             Node nodeValCurs = doc.getElementsByTagName("ValCurs").item(0);
             Element elemValCurs = (Element) nodeValCurs;
 
+            String date = elemValCurs.getAttribute("Date");
+
             valCurs = new ValCurs(
-                    elemValCurs.getAttribute("Date"),
+                    stringToDate(date),
                     elemValCurs.getAttribute("name")
                     );
 
@@ -54,12 +59,19 @@ public class XMLService {
                     valutes.add(valute);
                 }
             }
-            valCurs.setValutes(valutes);
+            valCurs.setValuteList(valutes);
 
         } catch (Exception ex) {
             logger.error(ex.getMessage());
         }
 
         return valCurs;
+    }
+
+    private Date stringToDate(String dateString) throws ParseException {
+        DateFormat sourceFormat = new SimpleDateFormat("dd.MM.yyyy");
+        Date date = sourceFormat.parse(dateString);
+        date.setDate(date.getDay() + 1);
+        return date;
     }
 }

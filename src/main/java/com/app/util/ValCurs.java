@@ -1,20 +1,21 @@
 package com.app.util;
 
+import java.util.Date;
 import java.util.List;
 
 public class ValCurs {
 
-    private String Date;
+    private Date date;
     private String name;
-    private List<Valute> valutes;
+    private List<Valute> valuteList;
 
-    public ValCurs(String date, String name) {
-        Date = date;
+    public ValCurs(Date date, String name) {
+        this.date = date;
         this.name = name;
     }
 
-    public void setDate(String Date) {
-        this.Date = Date;
+    public void setDate(Date Date) {
+        this.date = Date;
     }
     public String getName() {
         return name;
@@ -22,18 +23,18 @@ public class ValCurs {
     public void setName(String name) {
         this.name = name;
     }
-    public List<Valute> getValutes() {
-        return valutes;
+    public List<Valute> getValuteList() {
+        return valuteList;
     }
-    public void setValutes(List<Valute> valutes) {
-        this.valutes = valutes;
+    public void setValuteList(List<Valute> valuteList) {
+        this.valuteList = valuteList;
     }
-    public String getDate() {
-        return Date;
+    public Date getDate() {
+        return date;
     }
 
     @Override
     public String toString() {
-        return "ValCurs " + Date + " " + name + "\n" + valutes;
+        return "ValCurs " + date + " " + name + "\n" + valuteList;
     }
 }
