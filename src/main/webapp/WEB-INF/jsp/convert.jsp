@@ -1,6 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:useBean id="sumObtained" scope="request" type="java.lang.Integer"/>
-<jsp:useBean id="sum" scope="request" type="java.lang.Integer"/>
 
 <!DOCTYPE html>
 <html>
@@ -9,12 +7,16 @@
     <title>Money Converter</title>
 </head>
 <body>
-    <form method="POST">
+    <form method="POST" action="convert" name="currency_convert_form">
         <label>
-            <input name="sum" type="number" min="0" ${sum}/>
+            <input name="sum" type="text"
+                   value="<c:out value="${sum}"/>"
+            />
         </label>
         <label>
-            <input name="sumObtained" type="number" min="0" ${sumObtained}/>
+            <input name="sumObtained" type="text"
+                   value="<c:out value="${sumObtained}"/>"
+            />
         </label>
         <label>
             <input type="submit" value="Submit" />
