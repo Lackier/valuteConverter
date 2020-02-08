@@ -1,9 +1,9 @@
 package com.app;
 
 import com.app.model.Currency;
-import com.app.repository.CurrenciesRepo;
 import com.app.service.CurrencyLoaderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,21 +12,22 @@ import org.springframework.context.annotation.Bean;
 import java.util.List;
 
 @SpringBootApplication
-public class ServingWebContentApplication implements CommandLineRunner {
+public class ServingWebContentApplication{
 
-    @Autowired
-    private CurrencyLoaderService currencyService;
+    private static final Logger log = LoggerFactory.getLogger(ServingWebContentApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(ServingWebContentApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
+    @Bean
+    public CommandLineRunner run(CurrencyLoaderService currencyService) throws Exception {
         List<Currency> currencies = currencyService.parseDailyCurrencies("http://www.cbr.ru/scripts/XML_daily.asp");
 
-        for (Currency currency: currencies) {
-            System.out.println(currency);
-        }
+        return args -> {
+            for (Currency currency: currencies) {
+                log.info(currency.toString());
+            }
+        };
     }
 }
