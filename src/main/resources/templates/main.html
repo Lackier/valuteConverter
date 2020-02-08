@@ -5,6 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    
+    <h1>Converter</h1>
+
+    <form th:action="@{/convert}"
+          th:object="${currencyConvertationForm}" method="POST">
+
+        <input type="text" th:field="*{sum}" />
+        <br/>
+
+        <input type="text" th:field="*{sumObtained}" />
+        <br/>
+        <input type="submit" value="Create" />
+    </form>
 </body>
 </html>
