@@ -45,7 +45,6 @@ public class CurrencyLoaderService {
                 if(node.getNodeType() == Node.ELEMENT_NODE) {
                     Element elem = (Element) node;
                     Currency currency = new Currency(
-                            elem.getAttribute("ID"),
                             elem.getElementsByTagName("NumCode").item(0).getTextContent(),
                             elem.getElementsByTagName("CharCode").item(0).getTextContent(),
                             Integer.parseInt(elem.getElementsByTagName("Nominal").item(0).getTextContent()),

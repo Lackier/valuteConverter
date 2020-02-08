@@ -1,19 +1,17 @@
 package com.app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.util.Date;
 
+
+@Table(name = "Currencies")
 @Entity
 public class Currency {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long Id;
+    private Long id;
 
-    private String id;
     private String numCode;
     private String charCode;
     private int nominal;
@@ -23,8 +21,7 @@ public class Currency {
 
     protected Currency(){};
 
-    public Currency(String ID, String numCode, String charCode, int nominal, String name, String value, Date date) {
-        this.id = ID;
+    public Currency(String numCode, String charCode, int nominal, String name, String value, Date date) {
         this.numCode = numCode;
         this.charCode = charCode;
         this.nominal = nominal;
@@ -34,7 +31,7 @@ public class Currency {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public String getNumCode() {
@@ -81,6 +78,6 @@ public class Currency {
 
     @Override
     public String toString() {
-        return Id + " " + id + " " + numCode + " " + charCode + " " + nominal + " " + name + " " + value + "\n";
+        return id + " " + numCode + " " + charCode + " " + nominal + " " + name + " " + value;
     }
 }
