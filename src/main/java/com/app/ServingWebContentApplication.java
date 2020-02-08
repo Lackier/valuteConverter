@@ -1,7 +1,5 @@
 package com.app;
 
-import com.app.model.Currency;
-import com.app.repository.CurrenciesRepo;
 import com.app.service.CurrencyLoaderService;
 import com.app.service.CurrencyService;
 import org.slf4j.Logger;
