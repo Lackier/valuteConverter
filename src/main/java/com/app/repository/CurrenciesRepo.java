@@ -13,5 +13,4 @@ public interface CurrenciesRepo extends CrudRepository<Currency, Long>{
 
     Optional<Currency> findByDateAndName(Date date, String name);
     Optional<Currency> findById(Long id);
-
 }
