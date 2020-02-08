@@ -1,15 +1,15 @@
 package com.app;
 
 import com.app.model.Currency;
+import com.app.repository.CurrenciesRepo;
 import com.app.service.CurrencyLoaderService;
+import com.app.service.CurrencyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.List;
 
 @SpringBootApplication
 public class ServingWebContentApplication{
@@ -21,13 +21,23 @@ public class ServingWebContentApplication{
     }
 
     @Bean
-    public CommandLineRunner run(CurrencyLoaderService currencyService) throws Exception {
-        List<Currency> currencies = currencyService.parseDailyCurrencies("http://www.cbr.ru/scripts/XML_daily.asp");
+    public CommandLineRunner run(CurrencyLoaderService currencyLoader, CurrencyService currencyService) {
+        String URL = "http://www.cbr.ru/scripts/XML_daily.asp";
+
+        currencyService.saveCurrenciesIfNotPresent(
+                currencyLoader
+                        .parseDailyCurrencies(URL)
+        );
 
         return args -> {
-            for (Currency currency: currencies) {
+            /*
+            Iterable<Currency> currencies1 = currenciesRepo.findAll();
+            for (Currency currency: currencies1){
                 log.info(currency.toString());
             }
+            */
         };
     }
+
+
 }

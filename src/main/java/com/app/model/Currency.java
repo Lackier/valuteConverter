@@ -78,6 +78,6 @@ public class Currency {
 
     @Override
     public String toString() {
-        return id + " " + numCode + " " + charCode + " " + nominal + " " + name + " " + value;
+        return id + " " + numCode + " " + charCode + " " + nominal + " " + name + " " + value + " " + date;
     }
 }
