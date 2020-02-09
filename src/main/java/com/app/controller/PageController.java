@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -39,10 +40,20 @@ public class PageController {
             model.addAttribute("sumObtained", sumObtained);
         }
 
-        List<String> currencyNames = currencyService.findAllCurrencyNamesForToday();
-        model.addAttribute("currenciesFrom", currencyNames);
-        model.addAttribute("currenciesTo", currencyNames);
+        model.addAttribute("currenciesFrom", getNewCurrencyNamesList(currencyFrom));
+        model.addAttribute("currenciesTo", getNewCurrencyNamesList(currencyTo));
 
         return "convert";
+    }
+
+    private ArrayList<String> getNewCurrencyNamesList(String elementToBeFirst){
+        ArrayList<String> sourceList = currencyService.findAllCurrencyNamesForToday();
+        ArrayList<String> currencyNames = new ArrayList<>();
+
+        currencyNames.add(elementToBeFirst);
+        sourceList.remove(elementToBeFirst);
+        currencyNames.addAll(sourceList);
+
+        return currencyNames;
     }
 }
