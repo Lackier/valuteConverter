@@ -10,12 +10,16 @@ public class Util {
         return LocalDate.now().minusDays(1L);
     }
 
-    public static double getJavasDouble(String number){
+    public static LocalDate todayDate() {
+        return LocalDate.now();
+    }
+
+    public static double getJavasDouble(String number) {
         number = number.replace(',', '.');
         return Double.parseDouble(number);
     }
 
-    public static  Currency getRuble(){
+    public static Currency getRuble() {
         return new Currency(
                 "000",
                 "RUR",

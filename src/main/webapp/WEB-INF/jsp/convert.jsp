@@ -12,7 +12,7 @@
 
     <form method="POST" action="convert" name="currency_convert_form">
         <div>
-            <h1>Converter</h1>
+            <h1>Конвертировать</h1>
         </div>
 
         <div>
@@ -52,6 +52,23 @@
         </div>
     </form>
 
+    <div>
+        <h1>История</h1>
+    </div>
+
+    <div>
+        <table>
+            <c:forEach items="${history}" var="record">
+                <tr>
+                    <td> ${record.currencyFromName} </td>
+                    <td> ${record.currencyToName} </td>
+                    <td> ${record.sum} </td>
+                    <td> ${record.sumObtained} </td>
+                    <td> ${record.date} </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
 
 </div>
 </body>

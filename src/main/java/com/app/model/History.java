@@ -12,15 +12,15 @@ public class History {
 
     private int currencyFromId;
     private int currencyToId;
-    private int sum;
-    private int sumObtained;
+    private double sum;
+    private double sumObtained;
     private int userId;
     private LocalDate date;
 
     protected History() {
     }
 
-    public History(int currencyFromId, int currencyToId, int sum, int sumObtained, int userId, LocalDate date) {
+    public History(int currencyFromId, int currencyToId, double sum, double sumObtained, int userId, LocalDate date) {
         this.currencyFromId = currencyFromId;
         this.currencyToId = currencyToId;
         this.sum = sum;
@@ -37,7 +37,7 @@ public class History {
         this.id = id;
     }
 
-    public int getCurrencyFromId() {
+    public int getCurrencyFromId(Long id) {
         return currencyFromId;
     }
 
@@ -45,7 +45,7 @@ public class History {
         this.currencyFromId = currencyFromId;
     }
 
-    public int getCurrencyToId() {
+    public int getCurrencyToId(Long id) {
         return currencyToId;
     }
 
@@ -53,19 +53,19 @@ public class History {
         this.currencyToId = currencyToId;
     }
 
-    public int getSum() {
+    public double getSum() {
         return sum;
     }
 
-    public void setSum(int sum) {
+    public void setSum(double sum) {
         this.sum = sum;
     }
 
-    public int getSumObtained() {
+    public double getSumObtained() {
         return sumObtained;
     }
 
-    public void setSumObtained(int sumObtained) {
+    public void setSumObtained(double sumObtained) {
         this.sumObtained = sumObtained;
     }
 

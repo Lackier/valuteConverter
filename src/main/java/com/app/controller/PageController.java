@@ -1,6 +1,9 @@
 package com.app.controller;
 
 import com.app.service.CurrencyService;
+import com.app.service.HistoryService;
+import com.app.util.HistoryRecord;
+import com.app.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,8 @@ import java.util.List;
 public class PageController {
     @Autowired
     CurrencyService currencyService;
+    @Autowired
+    HistoryService historyService;
 
     @RequestMapping(value = {"/convert"}, method = RequestMethod.GET)
     public String show(Model model) {
@@ -22,6 +27,8 @@ public class PageController {
         List<String> currencyNames = currencyService.findAllCurrencyNamesForToday();
         model.addAttribute("currenciesFrom", currencyNames);
         model.addAttribute("currenciesTo", currencyNames);
+
+        model.addAttribute("history", historyService.getHistoryRecordsById((long) 0));
 
         return "convert";
     }
@@ -39,6 +46,11 @@ public class PageController {
             double sumObtained = currencyService.obtainSum(currencyFromCODE, currencyToCODE, sum);
             model.addAttribute("sum", sum);
             model.addAttribute("sumObtained", sumObtained);
+
+            historyService.addRecord(new HistoryRecord(
+                    currencyFrom, currencyTo, sum, sumObtained, Util.todayDate()), 0);
+
+            model.addAttribute("history", historyService.getHistoryRecordsById((long) 0));
         }
 
         model.addAttribute("currenciesFrom", getNewCurrencyNamesList(currencyFrom));

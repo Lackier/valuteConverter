@@ -6,8 +6,8 @@ import com.app.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,5 +43,27 @@ public class CurrencyService {
 
         return (((currencyFrom.getValue() / currencyFrom.getNominal()) * currencyTo.getNominal())
                 / currencyTo.getValue()) * sum;
+    }
+
+    String getCurrencyNameById(Long id){
+
+        Optional<Currency> currencyOpt = currenciesRepo.findById(id);
+
+        if (!currencyOpt.isPresent())
+            return "";
+
+        Currency currency = currencyOpt.get();
+
+        return currency.getCharCode() + " " + currency.getName();
+    }
+
+    long getCurrencyIdByNameAndDate(String name, LocalDate date){
+
+        Optional<Currency> currency = currenciesRepo.findByDateAndName(date, name);
+
+        if (!currency.isPresent())
+            return 0;
+
+        return currency.get().getId();
     }
 }
