@@ -22,9 +22,9 @@ public class HistoryService {
         historyRepo.findAllByUserId((int) userId)
                 .forEach(record -> records
                         .add(new HistoryRecord(
-                                currencyService.getCurrencyNameById(
+                                currencyService.getCurrencyFullNameById(
                                         (long) record.getCurrencyFromId(userId)),
-                                currencyService.getCurrencyNameById(
+                                currencyService.getCurrencyFullNameById(
                                         (long) record.getCurrencyToId(userId)),
                                 record.getSum(),
                                 record.getSumObtained(),
@@ -36,10 +36,10 @@ public class HistoryService {
 
     public void addRecord(HistoryRecord record, long id) {
         historyRepo.save(new History(
-                (int) currencyService.getCurrencyIdByNameAndDate(
-                        record.getCurrencyFromName().split(" ")[0], record.getDate()),
-                (int) currencyService.getCurrencyIdByNameAndDate(
-                        record.getCurrencyToName().split(" ")[0], record.getDate()),
+                (int) currencyService.getCurrencyIdByCharCodeAndDate(
+                        record.getCurrencyFromName().split(" ")[0], record.getDate().minusDays(1L)),
+                (int) currencyService.getCurrencyIdByCharCodeAndDate(
+                        record.getCurrencyToName().split(" ")[0], record.getDate().minusDays(1L)),
                 record.getSum(),
                 record.getSumObtained(),
                 (int) id,

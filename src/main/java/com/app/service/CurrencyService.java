@@ -45,7 +45,7 @@ public class CurrencyService {
                 / currencyTo.getValue()) * sum;
     }
 
-    String getCurrencyNameById(Long id){
+    String getCurrencyFullNameById(Long id){
 
         Optional<Currency> currencyOpt = currenciesRepo.findById(id);
 
@@ -57,9 +57,9 @@ public class CurrencyService {
         return currency.getCharCode() + " " + currency.getName();
     }
 
-    long getCurrencyIdByNameAndDate(String name, LocalDate date){
+    long getCurrencyIdByCharCodeAndDate(String code, LocalDate date){
 
-        Optional<Currency> currency = currenciesRepo.findByDateAndName(date, name);
+        Optional<Currency> currency = currenciesRepo.findByDateAndCharCode(date, code);
 
         if (!currency.isPresent())
             return 0;

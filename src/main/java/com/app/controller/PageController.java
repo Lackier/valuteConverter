@@ -54,7 +54,9 @@ public class PageController {
             historyService.addRecord(new HistoryRecord(
                     currencyFrom, currencyTo, sum, sumObtained, Util.todayDate()), userID);
 
-            model.addAttribute("history", historyService.getHistoryRecordsById(userID));
+            ArrayList<HistoryRecord> records = historyService.getHistoryRecordsById(userID);
+
+            model.addAttribute("history", records);
         }
 
         model.addAttribute("currenciesFrom", getNewCurrencyNamesList(currencyFrom));
