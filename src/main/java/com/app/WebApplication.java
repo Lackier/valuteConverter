@@ -10,12 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class ServingWebContentApplication {
+public class WebApplication {
 
-    private static final Logger log = LoggerFactory.getLogger(ServingWebContentApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(WebApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(ServingWebContentApplication.class, args);
+        SpringApplication.run(WebApplication.class, args);
     }
 
     @Bean

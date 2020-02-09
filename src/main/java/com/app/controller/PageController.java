@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -18,7 +17,7 @@ public class PageController {
     @RequestMapping(value = {"/convert"}, method = RequestMethod.GET)
     public String show(Model model) {
 
-        List<String> currencyNames = currencyService.findAllCurrencyNamesForToday(new Date());
+        List<String> currencyNames = currencyService.findAllCurrencyNamesForToday();
 
         model.addAttribute("currenciesFrom", currencyNames);
         model.addAttribute("currenciesTo", currencyNames);
@@ -39,26 +38,26 @@ public class PageController {
         return "convert";
     }
 
-    @RequestMapping(value = {"/debug"}, method = RequestMethod.GET)
-    public String debugMethod() {
+    @RequestMapping(value = {"/debug/all"}, method = RequestMethod.GET)
+    public String debugAll(Model model) {
 
-        StringBuilder stringBuilder = new StringBuilder();
         Iterable<Currency> curs = currencyService.findAll();
 
+        StringBuilder stringBuilder = new StringBuilder();
         for (Currency cur : curs)
-            stringBuilder.append(cur.toString());
+            stringBuilder.append(cur);
 
         return stringBuilder.toString();
     }
 
     @RequestMapping(value = {"/debug/names"}, method = RequestMethod.GET)
-    public String debugNamesMethod() {
+    public String debug(Model model) {
+
+        List<String> currencyNames = currencyService.findAllCurrencyNamesForToday();
 
         StringBuilder stringBuilder = new StringBuilder();
-        Iterable<String> names = currencyService.findAllCurrencyNamesForToday(new Date());
-
-        for (String name : names)
-            stringBuilder.append(name);
+        for (String s : currencyNames)
+            stringBuilder.append(s);
 
         return stringBuilder.toString();
     }

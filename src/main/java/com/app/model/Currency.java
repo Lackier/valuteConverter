@@ -1,6 +1,7 @@
 package com.app.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -17,11 +18,11 @@ public class Currency {
     private int nominal;
     private String name;
     private String value;
-    private Date date;
+    private LocalDate date;
 
     protected Currency(){};
 
-    public Currency(String numCode, String charCode, int nominal, String name, String value, Date date) {
+    public Currency(String numCode, String charCode, int nominal, String name, String value, LocalDate date) {
         this.numCode = numCode;
         this.charCode = charCode;
         this.nominal = nominal;
@@ -69,10 +70,10 @@ public class Currency {
         this.value = value;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

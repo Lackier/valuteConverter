@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html>
@@ -16,23 +17,16 @@
 
         <div>
             <label>
-                <select width="100px" name="currenciesFrom">
-                    <c:forEach items="${currenciesFrom}"
-                               var="currencyName">
-                        <option type="text"
-                                value="${currencyName}">
-                                ${currencyName}
-                        </option>
+                <select name="currencyNameFrom">
+                    <c:forEach items="${currenciesFrom}" var="currencyName">
+                        <option value="${currencyName}">${currencyName}</option>
                     </c:forEach>
                 </select>
-
-                <select width="100px" name="currenciesTo">
-                    <c:forEach items="${currenciesTo}"
-                               var="currencyName">
-                        <option type="text"
-                                value="${currencyName}">
-                                ${currencyName}
-                        </option>
+            </label>
+            <label>
+                <select name="currencyNameTo">
+                    <c:forEach items="${currenciesTo}" var="currencyName">
+                        <option value="${currencyName}">${currencyName}</option>
                     </c:forEach>
                 </select>
             </label>
