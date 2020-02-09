@@ -56,7 +56,7 @@
         <h1>История</h1>
     </div>
 
-    <div>
+    <div style="text-align: left;">
         <table>
             <c:forEach items="${history}" var="record">
                 <tr>

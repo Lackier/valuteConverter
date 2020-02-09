@@ -20,6 +20,7 @@ public class PageController {
     CurrencyService currencyService;
     @Autowired
     HistoryService historyService;
+    private int userID = 1;
 
     @RequestMapping(value = {"/convert"}, method = RequestMethod.GET)
     public String show(Model model) {
@@ -28,7 +29,10 @@ public class PageController {
         model.addAttribute("currenciesFrom", currencyNames);
         model.addAttribute("currenciesTo", currencyNames);
 
-        model.addAttribute("history", historyService.getHistoryRecordsById((long) 0));
+        ArrayList<HistoryRecord> records = historyService.getHistoryRecordsById(userID);
+
+        if(!records.isEmpty())
+            model.addAttribute("history", records);
 
         return "convert";
     }
@@ -48,9 +52,9 @@ public class PageController {
             model.addAttribute("sumObtained", sumObtained);
 
             historyService.addRecord(new HistoryRecord(
-                    currencyFrom, currencyTo, sum, sumObtained, Util.todayDate()), 0);
+                    currencyFrom, currencyTo, sum, sumObtained, Util.todayDate()), userID);
 
-            model.addAttribute("history", historyService.getHistoryRecordsById((long) 0));
+            model.addAttribute("history", historyService.getHistoryRecordsById(userID));
         }
 
         model.addAttribute("currenciesFrom", getNewCurrencyNamesList(currencyFrom));

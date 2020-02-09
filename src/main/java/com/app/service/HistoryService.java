@@ -15,26 +15,31 @@ public class HistoryService {
     @Autowired
     private CurrencyService currencyService;
 
-    public ArrayList<HistoryRecord> getHistoryRecordsById(Long id) {
+    public ArrayList<HistoryRecord> getHistoryRecordsById(long userId) {
 
         ArrayList<HistoryRecord> records = new ArrayList<>();
 
-        historyRepo.findAllByUserId(id)
+        historyRepo.findAllByUserId((int) userId)
                 .forEach(record -> records
                         .add(new HistoryRecord(
-                                currencyService.getCurrencyNameById((long) record.getCurrencyFromId(id)),
-                                currencyService.getCurrencyNameById((long) record.getCurrencyToId(id)),
+                                currencyService.getCurrencyNameById(
+                                        (long) record.getCurrencyFromId(userId)),
+                                currencyService.getCurrencyNameById(
+                                        (long) record.getCurrencyToId(userId)),
                                 record.getSum(),
                                 record.getSumObtained(),
                                 record.getDate()
                         )));
+
         return records;
     }
 
     public void addRecord(HistoryRecord record, long id) {
         historyRepo.save(new History(
-                (int) currencyService.getCurrencyIdByNameAndDate(record.getCurrencyFromName(), record.getDate()),
-                (int) currencyService.getCurrencyIdByNameAndDate(record.getCurrencyToName(), record.getDate()),
+                (int) currencyService.getCurrencyIdByNameAndDate(
+                        record.getCurrencyFromName().split(" ")[0], record.getDate()),
+                (int) currencyService.getCurrencyIdByNameAndDate(
+                        record.getCurrencyToName().split(" ")[0], record.getDate()),
                 record.getSum(),
                 record.getSumObtained(),
                 (int) id,
