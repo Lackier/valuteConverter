@@ -2,7 +2,6 @@ package com.app.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 
 @Table(name = "Currencies")
@@ -10,7 +9,7 @@ import java.util.Date;
 public class Currency {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String numCode;
@@ -20,7 +19,8 @@ public class Currency {
     private double value;
     private LocalDate date;
 
-    protected Currency(){};
+    protected Currency() {
+    }
 
     public Currency(String numCode, String charCode, int nominal, String name, double value, LocalDate date) {
         this.numCode = numCode;
@@ -38,6 +38,7 @@ public class Currency {
     public String getNumCode() {
         return numCode;
     }
+
     public void setNumCode(String numCode) {
         this.numCode = numCode;
     }
@@ -45,6 +46,7 @@ public class Currency {
     public String getCharCode() {
         return charCode;
     }
+
     public void setCharCode(String charCode) {
         this.charCode = charCode;
     }
@@ -52,6 +54,7 @@ public class Currency {
     public int getNominal() {
         return nominal;
     }
+
     public void setNominal(int nominal) {
         this.nominal = nominal;
     }
@@ -59,6 +62,7 @@ public class Currency {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -66,6 +70,7 @@ public class Currency {
     public double getValue() {
         return value;
     }
+
     public void setValue(double value) {
         this.value = value;
     }
@@ -73,6 +78,7 @@ public class Currency {
     public LocalDate getDate() {
         return date;
     }
+
     public void setDate(LocalDate date) {
         this.date = date;
     }
