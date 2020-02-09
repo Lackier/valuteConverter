@@ -18,7 +18,6 @@ public class PageController {
     public String show(Model model) {
 
         List<String> currencyNames = currencyService.findAllCurrencyNamesForToday();
-
         model.addAttribute("currenciesFrom", currencyNames);
         model.addAttribute("currenciesTo", currencyNames);
 
@@ -27,7 +26,12 @@ public class PageController {
 
     @RequestMapping(value = {"/convert"}, method = RequestMethod.POST)
     public String convert(Model model,
-                          @RequestParam(value = "sum", required = false, defaultValue = "0") int sum) {
+                          @RequestParam(value = "sum", defaultValue = "0") int sum,
+                          @RequestParam(value = "currencyNameFrom") String currencyFrom,
+                          @RequestParam(value = "currencyNameTo") String currencyTo) {
+
+        String currencyFromCODE = currencyFrom.split(" ")[0];
+        String currencyToCODE = currencyTo.split(" ")[0];
 
         if (sum != 0) {
             int sumObtained = sum * 10;
@@ -35,30 +39,11 @@ public class PageController {
             model.addAttribute("sumObtained", sumObtained);
         }
 
-        return "convert";
-    }
-
-    @RequestMapping(value = {"/debug/all"}, method = RequestMethod.GET)
-    public String debugAll(Model model) {
-
-        Iterable<Currency> curs = currencyService.findAll();
-
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Currency cur : curs)
-            stringBuilder.append(cur);
-
-        return stringBuilder.toString();
-    }
-
-    @RequestMapping(value = {"/debug/names"}, method = RequestMethod.GET)
-    public String debug(Model model) {
 
         List<String> currencyNames = currencyService.findAllCurrencyNamesForToday();
+        model.addAttribute("currenciesFrom", currencyNames);
+        model.addAttribute("currenciesTo", currencyNames);
 
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String s : currencyNames)
-            stringBuilder.append(s);
-
-        return stringBuilder.toString();
+        return "convert";
     }
 }

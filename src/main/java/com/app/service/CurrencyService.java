@@ -25,7 +25,7 @@ public class CurrencyService {
         List<String> names = new ArrayList<>();
 
         currenciesRepo.findAllByDate(Util.yesterdayDate())
-                .forEach(c -> names.add(c.getName()));
+                .forEach(c -> names.add(c.getCharCode() + " " + c.getName()));
 
         return names;
     }

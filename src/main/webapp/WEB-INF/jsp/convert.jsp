@@ -18,15 +18,15 @@
         <div>
             <label>
                 <select name="currencyNameFrom">
-                    <c:forEach items="${currenciesFrom}" var="currencyName">
-                        <option value="${currencyName}">${currencyName}</option>
+                    <c:forEach items="${currenciesFrom}" var="currencyNameFrom">
+                        <option value="${currencyNameFrom}">${currencyNameFrom}</option>
                     </c:forEach>
                 </select>
             </label>
             <label>
                 <select name="currencyNameTo">
-                    <c:forEach items="${currenciesTo}" var="currencyName">
-                        <option value="${currencyName}">${currencyName}</option>
+                    <c:forEach items="${currenciesTo}" var="currencyNameTo">
+                        <option value="${currencyNameTo}">${currencyNameTo}</option>
                     </c:forEach>
                 </select>
             </label>
