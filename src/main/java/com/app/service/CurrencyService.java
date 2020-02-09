@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CurrencyService {
@@ -30,7 +31,17 @@ public class CurrencyService {
         return names;
     }
 
-    public Iterable<Currency> findAll() {
-        return currenciesRepo.findAll();
+    public double obtainSum(String currencyFromCODE, String currencyToCODE, double sum) {
+        Optional<Currency> currencyFromOpt = currenciesRepo.findByDateAndCharCode(Util.yesterdayDate(), currencyFromCODE);
+        Optional<Currency> currencyToOpt = currenciesRepo.findByDateAndCharCode(Util.yesterdayDate(), currencyToCODE);
+
+        if (!currencyFromOpt.isPresent() || !currencyToOpt.isPresent())
+            return 0;
+
+        Currency currencyFrom = currencyFromOpt.get();
+        Currency currencyTo = currencyToOpt.get();
+
+        return (((currencyFrom.getValue() / currencyFrom.getNominal()) * currencyTo.getNominal())
+                / currencyTo.getValue()) * sum;
     }
 }

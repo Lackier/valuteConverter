@@ -17,12 +17,12 @@ public class Currency {
     private String charCode;
     private int nominal;
     private String name;
-    private String value;
+    private double value;
     private LocalDate date;
 
     protected Currency(){};
 
-    public Currency(String numCode, String charCode, int nominal, String name, String value, LocalDate date) {
+    public Currency(String numCode, String charCode, int nominal, String name, double value, LocalDate date) {
         this.numCode = numCode;
         this.charCode = charCode;
         this.nominal = nominal;
@@ -63,10 +63,10 @@ public class Currency {
         this.name = name;
     }
 
-    public String getValue() {
+    public double getValue() {
         return value;
     }
-    public void setValue(String value) {
+    public void setValue(double value) {
         this.value = value;
     }
 

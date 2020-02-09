@@ -30,13 +30,12 @@ public class CurrencyLoaderService {
             Document doc = builder.parse(URL);
 
             doc.getDocumentElement().normalize();
-            Node nodeValCurs = doc.getElementsByTagName("ValCurs").item(0);
-            Element elemValCurs = (Element) nodeValCurs;
 
-            LocalDate date = stringToDate(elemValCurs.getAttribute("Date"));
+            LocalDate date = Util.yesterdayDate();
 
             NodeList nodeList = doc.getElementsByTagName("Valute");
             currencies = new ArrayList<>();
+            currencies.add(Util.getRuble());
 
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Node node = nodeList.item(i);
@@ -46,9 +45,11 @@ public class CurrencyLoaderService {
                     Currency currency = new Currency(
                             elem.getElementsByTagName("NumCode").item(0).getTextContent(),
                             elem.getElementsByTagName("CharCode").item(0).getTextContent(),
-                            Integer.parseInt(elem.getElementsByTagName("Nominal").item(0).getTextContent()),
+                            Integer.parseInt(
+                                    elem.getElementsByTagName("Nominal").item(0).getTextContent()),
                             elem.getElementsByTagName("Name").item(0).getTextContent(),
-                            elem.getElementsByTagName("Value").item(0).getTextContent(),
+                            Util.getJavasDouble(
+                                    elem.getElementsByTagName("Value").item(0).getTextContent()),
                             date
                     );
                     currencies.add(currency);
@@ -59,9 +60,5 @@ public class CurrencyLoaderService {
             logger.error(ex.getMessage());
         }
         return currencies;
-    }
-
-    private LocalDate stringToDate(String dateString) throws ParseException {
-        return Util.yesterdayDate();
     }
 }
