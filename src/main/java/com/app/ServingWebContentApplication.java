@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class ServingWebContentApplication{
+public class ServingWebContentApplication {
 
     private static final Logger log = LoggerFactory.getLogger(ServingWebContentApplication.class);
 

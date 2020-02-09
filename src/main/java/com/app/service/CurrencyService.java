@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CurrencyService {
@@ -14,18 +15,22 @@ public class CurrencyService {
     CurrenciesRepo currenciesRepo;
 
     public void saveCurrenciesIfNotPresent(Iterable<Currency> currencies) {
-        for (Currency currency: currencies) {
+        for (Currency currency : currencies) {
             if (!currenciesRepo.findByDateAndName(currency.getDate(), currency.getName()).isPresent())
                 currenciesRepo.save(currency);
         }
     }
 
-    public Iterable<String> findAllCurrencyNamesForToday(Date date){
-        ArrayList<String> names = new ArrayList<>();
+    public List<String> findAllCurrencyNamesForToday(Date date) {
+        List<String> names = new ArrayList<>();
 
         currenciesRepo.findAllByDate(date)
                 .forEach(c -> names.add(c.getName()));
 
         return names;
+    }
+
+    public Iterable<Currency> findAll() {
+        return currenciesRepo.findAll();
     }
 }
