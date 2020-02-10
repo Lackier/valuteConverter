@@ -9,12 +9,15 @@
 
     <style>
         table, th, td {
-            padding: 10px;
             border: 1px solid #2e2e2e;
             border-collapse: collapse;
         }
         table {
             position: center;
+            margin: auto;
+        }
+        td {
+            text-align: center;
         }
     </style>
 </head>
