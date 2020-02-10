@@ -6,6 +6,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Money Converter</title>
+
+    <style>
+        table, th, td {
+            padding: 10px;
+            border: 1px solid #2e2e2e;
+            border-collapse: collapse;
+        }
+        table {
+            position: center;
+        }
+    </style>
 </head>
 <body>
 <div style="text-align: center;">
