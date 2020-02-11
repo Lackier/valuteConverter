@@ -14,6 +14,10 @@
     <form method="POST" action="auth" name="user_authorise_form">
 
         <div>
+            <h1>Конвертер валют</h1>
+        </div>
+
+        <div>
             <label>
                 <input name="login" type="text"
                        value="<c:out value="${login}"/>"

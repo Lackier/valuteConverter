@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,8 @@ public class PageController {
     HistoryService historyService;
     private int userID = 1;
 
-    @RequestMapping(value = {"/convert"}, method = RequestMethod.GET)
-    public String show(Model model) {
+    //@RequestMapping(value = {"/convert"}, method = RequestMethod.GET)
+    private String showConvertPage(Model model, int userID) {
 
         List<String> currencyNames = currencyService.findAllCurrencyNamesForToday();
         model.addAttribute("currenciesFrom", currencyNames);
@@ -38,7 +39,7 @@ public class PageController {
     }
 
     @RequestMapping(value = {"/convert"}, method = RequestMethod.POST)
-    public String convert(Model model,
+    public String convertMoney(Model model,
                           @RequestParam(value = "sum", defaultValue = "0") double sum,
                           @RequestParam(value = "currencyNameFrom") String currencyFrom,
                           @RequestParam(value = "currencyNameTo") String currencyTo) {
@@ -63,6 +64,24 @@ public class PageController {
         model.addAttribute("currenciesTo", getNewCurrencyNamesList(currencyTo));
 
         return "convert";
+    }
+
+    @RequestMapping(value = {"/auth"}, method = RequestMethod.GET)
+    public String showAuthorisationPage(Model model) {
+
+        return "auth";
+    }
+
+    @RequestMapping(value = {"/auth"}, method = RequestMethod.POST)
+    public String authorise(Model model,
+                            @RequestParam(value = "login") String login,
+                            @RequestParam(value = "password") String password){
+
+        boolean correct = true;
+        if (!correct)
+            return "auth";
+
+        return showConvertPage(model, userID);
     }
 
     private ArrayList<String> getNewCurrencyNamesList(String elementToBeFirst) {
